@@ -2,23 +2,22 @@ package ru.dream.vacationpaycalculation.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.dream.vacationpaycalculation.entity.User;
 import ru.dream.vacationpaycalculation.repository.UserRepository;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.assertNotNull;
-
+@SpringBootTest
 class UserServiceTest {
-
     @Autowired
     private UserService userService;
     @Autowired
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
-    UserServiceTest(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Test
     void getAverageSalary() {
@@ -30,14 +29,9 @@ class UserServiceTest {
     @Test
     void addUser() {
         User user2 = new User();
-        user2.setId(0);
-        user2.setEmail("vova_sinikov@mail.ru");
-        user2.setLogin("vova_sinikov");
-        user2.setLastName("sitnikov");
-        user2.setPosition("инженер");
-        user2.setBirthDate(LocalDate.parse("12.09.1985"));
-        user2.setSalary(100000);
-
+        user2.setName("Name1");
+        user2.setEmail("vova_sinikov@mail.ru1");
+        user2.setLogin("vova_sinikov1");
         userService.addUser(user2);
     }
 

@@ -21,24 +21,27 @@ import java.time.LocalDate;
 public class User {
 
     @Id
+    @SequenceGenerator(name = "pet_seq",
+            sequenceName = "pet_sequence",
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "pet_seq")
     @Column(name = "id")
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_generator")
-    //@SequenceGenerator(name = "user_seq_generator", sequenceName = "user_seq", allocationSize = 1)
-    private int id;
+    private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "last_name", nullable = false)
+    //@Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login")
     private String login;
 
     @Column(name = "position")
     private String position;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "birth_date")

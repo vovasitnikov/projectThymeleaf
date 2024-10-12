@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.dream.vacationpaycalculation.entity.User;
 import ru.dream.vacationpaycalculation.service.UserService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 @Controller
 @RequestMapping("/users") //наименование URL, по которому переход будет
@@ -40,7 +43,7 @@ public class UserController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute("user") User user) {
-        //userService.addUser(user);
+        userService.addUser(user);
         return "redirect:/users"; //наименование URL, по которому переход будет
     }
 
