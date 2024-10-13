@@ -2,11 +2,19 @@ package ru.dream.vacationpaycalculation.config;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
 public class MySpringMvcDispatcherSerlvetIntitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    @Autowired
+    HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+    }
+
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
@@ -37,4 +45,6 @@ public class MySpringMvcDispatcherSerlvetIntitializer extends AbstractAnnotation
         aContext.addFilter("hiddenHttpMethodFilter",
                 new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
     }
+
+
 }
