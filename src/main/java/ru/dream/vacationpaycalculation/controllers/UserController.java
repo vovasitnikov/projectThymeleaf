@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.dream.vacationpaycalculation.entity.User;
 import ru.dream.vacationpaycalculation.service.UserService;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 @Controller
@@ -47,12 +45,23 @@ public class UserController {
         return "redirect:/users"; //наименование URL, по которому переход будет
     }
 
-
     @GetMapping("/calculacte")
     public ResponseEntity<Double> getAverageSalary(@RequestParam(value = "averageSalaryPerMonth") Double averageSalaryPerMonth,
                                                    @RequestParam(value = "countDays") Integer countDays){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(userService.getAverageSalary(averageSalaryPerMonth, countDays));
+    }
+
+    @GetMapping("/{id}/edit") //отправляем юзера на форму для редактирования
+    public String edit(Model model, @PathVariable("id") int id){
+        model.addAttribute("user", userService.getUserById(id).get());
+        return "users/edit";
+    }
+
+    @PatchMapping("/update/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        userService.update(id, user);
+        return "redirect/users/index";
     }
 }

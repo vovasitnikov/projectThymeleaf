@@ -1,10 +1,13 @@
 package ru.dream.vacationpaycalculation.service;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import ru.dream.vacationpaycalculation.entity.User;
 import ru.dream.vacationpaycalculation.repository.UserRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +41,17 @@ public class UserService {
     public User deleteUser(int userId){
         userRepository.deleteById(userId);
         return null;
+    }
+
+    public void update(int id, User updateUser){
+        User userToBeUpdated = userRepository.findById(id).orElseThrow(EntityNotFoundException::new); // Определение местонахождения Алисы
+        userToBeUpdated.setName(updateUser.getName());
+        userToBeUpdated.setLastName(updateUser.getLastName());
+        userToBeUpdated.setLogin(updateUser.getLogin());
+        userToBeUpdated.setPosition(updateUser.getPosition());
+        userToBeUpdated.setEmail(updateUser.getEmail());
+        userToBeUpdated.setBirthDate(updateUser.getBirthDate());
+        userToBeUpdated.setSalary(updateUser.getSalary());
+        userRepository.save(userToBeUpdated);
     }
 }
