@@ -59,9 +59,15 @@ public class UserController {
         return "users/edit";
     }
 
-    @PostMapping("/editUser/{id}")
+    @PostMapping("/editUser/{id}") //принимаем отредактированного пользователя
     public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         userService.update(id, user);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable("id") int id){
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }

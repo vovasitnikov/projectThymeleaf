@@ -21,7 +21,15 @@
 <p th:text="${user.getBirthDate()}">VALUE</p>
 <label>Salary:</label>
 <p th:text="${user.getSalary()}">VALUE</p>
-
+<br/>
+<br/>
+<hr/>
 <a th:href="@{ /users/{id}/edit( id=${ user.getId() } ) }">Edit user</a>
+<br/>
+<br/>
+<hr/>
+<form th:method="DELETE" th:action="@{ /users/{id}/delete( id=${ user.getId() } ) }">
+    <input type="submit" value="Delete" />
+</form>
 </body>
 </html>
